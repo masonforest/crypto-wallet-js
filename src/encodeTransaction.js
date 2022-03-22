@@ -24,6 +24,7 @@ const DEFAULT_SEQUENCE = 4294967295;
 function encodeInput({ hash, index, script, sequence = DEFAULT_SEQUENCE }) {
   return concatBytes(
       hash,
+      // hash.reverse(),
       uInt32ToBytes(index),
       script.length,
       script,

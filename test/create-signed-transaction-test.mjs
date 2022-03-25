@@ -30,9 +30,7 @@ describe("createSignedTransaction", function () {
           script: hex`76a914dd6cce9f255a8cc17bda8ba0373df8e861cb866e88ac`,
         },
       ],
-      recipientPublicKeyHash: addressToPublicKeyHash(
-        "14zWNsgUMmHhYx4suzc2tZD6HieGbkQi5s"
-      ),
+      recipientAddress: "14zWNsgUMmHhYx4suzc2tZD6HieGbkQi5s",
       value: numberToSatoshis(0.00118307),
       privateKey,
     });
@@ -49,6 +47,7 @@ describe("createSignedTransaction", function () {
       await addressFromPublicKey(CHAIN_IDS.DOGE, publicKey)
     );
     const signedTransation = await createSignedTransaction({
+      chainId: CHAIN_IDS.DOGE,
       unspentTransationOutputs,
       recipientPublicKeyHash: addressToPublicKeyHash(
         "DBzndTAcHKsGv2k1jkbvvgZ3WrFzvoY3qR"

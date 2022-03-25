@@ -3,4 +3,3 @@ module.exports = {
   medium: 1001n,
   slow: 1000n,
 };
-

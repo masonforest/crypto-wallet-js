@@ -2,10 +2,11 @@
   "name": "crypto-wallet",
   "version": "0.0.1",
   "description": "Bitcoin Wallet",
+  "type": "module",
   "main": "src/index.js",
   "scripts": {
     "watch": "./node_modules/nodemon/bin/nodemon.js --watch . --exec 'mocha ./test || true'",
-    "format": "node node_modules/prettier/bin-prettier.js --write src/*.js test/*.js"
+    "format": "node node_modules/prettier/bin-prettier.js --write src/*.mjs src/**/*.mjs test/**.mjs"
   },
   "author": "",
   "license": "ISC",

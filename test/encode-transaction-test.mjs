@@ -1,14 +1,11 @@
-const secp256k1 = require("@noble/secp256k1");
-const { encodeTransaction, CHAIN_IDS } = require("../src/index.js");
-const {
-  addressFromPublicKey,
-  standardTransactionScript,
-  numberToSatoshis,
-} = require("../src/index.js");
-const { oneLineTrim } = require("common-tags");
-const { base58 } = require("@scure/base");
-const { hex, assertBytesEqual } = require("./test-helpers");
-var assert = require("assert");
+import * as secp256k1 from "@noble/secp256k1";
+import { encodeTransaction, CHAIN_IDS } from "../src/index.mjs";
+import * as standardTransactionScript from "../src/scripts/standardTransaction.mjs";
+import { addressFromPublicKey, numberToSatoshis } from "../src/index.mjs";
+import { oneLineTrim } from "common-tags";
+import { base58 } from "@scure/base";
+import { hex, assertBytesEqual } from "./test-helpers.mjs";
+import * as assert from "assert";
 
 describe("encodeTransaction", function () {
   it("encodes the transaction", async function () {

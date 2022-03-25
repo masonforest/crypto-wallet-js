@@ -1,29 +1,29 @@
-const { base58check } = require("@scure/base");
-const { sha256 } = require("@noble/hashes/sha256");
+import { base58check } from "@scure/base";
+import { sha256 } from "@noble/hashes/sha256";
 
-function addressToPublicKeyHash(address) {
+export function addressToPublicKeyHash(address) {
   return base58check(sha256).decode(address).slice(1);
 }
 
-function uInt64ToBytes(n) {
-  arr = new ArrayBuffer(8);
-  view = new DataView(arr);
+export function uInt64ToBytes(n) {
+  const arr = new ArrayBuffer(8);
+  const view = new DataView(arr);
   view.setBigUint64(0, n, true);
   return new Uint8Array(arr);
 }
 
-function uInt32ToBytes(n) {
-  arr = new ArrayBuffer(4);
-  view = new DataView(arr);
+export function uInt32ToBytes(n) {
+  const arr = new ArrayBuffer(4);
+  const view = new DataView(arr);
   view.setUint32(0, n, true);
   return new Uint8Array(arr);
 }
 
-function numberToSatoshis(n) {
+export function numberToSatoshis(n) {
   return BigInt(n * 100000000);
 }
 
-function encodeCompactSizeUint(n) {
+export function encodeCompactSizeUint(n) {
   if (n <= 0xfc) {
     return new Uint8Array([n]);
   } else if (n <= 0xffff) {
@@ -43,11 +43,11 @@ function encodeCompactSizeUint(n) {
   }
 }
 
-function isUint8a(bytes) {
+export function isUint8a(bytes) {
   return bytes instanceof Uint8Array;
 }
 
-function concatBytes(...arraysAndUints) {
+export function concatBytes(...arraysAndUints) {
   const arrays = arraysAndUints.map((arrayOrUint) =>
     typeof arrayOrUint === "number"
       ? new Uint8Array([arrayOrUint])
@@ -65,16 +65,6 @@ function concatBytes(...arraysAndUints) {
   return result;
 }
 
-function doubleSha256(messsage) {
-  return sha256(sha256(messsage))
+export function doubleSha256(messsage) {
+  return sha256(sha256(messsage));
 }
-
-module.exports = {
-  addressToPublicKeyHash,
-  uInt64ToBytes,
-  uInt32ToBytes,
-  numberToSatoshis,
-  concatBytes,
-  doubleSha256,
-  encodeCompactSizeUint,
-};

@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   OP_DUP: 118,
   OP_EQUALVERIFY: 136,
   OP_HASH160: 169,

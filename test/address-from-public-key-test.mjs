@@ -1,6 +1,6 @@
-const secp256k1 = require("@noble/secp256k1");
-const { addressFromPublicKey, CHAIN_IDS } = require("../src/index.js");
-var assert = require("assert");
+import * as secp256k1 from "@noble/secp256k1";
+import { addressFromPublicKey, CHAIN_IDS } from "../src/index.mjs";
+import assert from "assert";
 
 describe("addressFromPublicKey", function () {
   describe("Bitcoin", function () {

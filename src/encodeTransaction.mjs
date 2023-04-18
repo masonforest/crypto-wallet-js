@@ -1,9 +1,5 @@
-import {
-  uInt32ToBytes,
-  uInt64ToBytes,
-  concatBytes,
-  encodeCompactSizeUint,
-} from "./utils.mjs";
+import { encodeAny, encodeBytes, encodeCompactSizeUint } from "./utils.mjs";
+import { MAX_SEQUENCE } from "./constants.mjs";
 import * as standardTransactionScript from "./scripts/standardTransaction.mjs";
 export default function encodeTransaction({
   versionByte = 1,
@@ -11,27 +7,21 @@ export default function encodeTransaction({
   outputs,
   lockTime = 0,
 }) {
-  return concatBytes(
-    uInt32ToBytes(versionByte),
-    encodeCompactSizeUint(inputs.length),
-    ...inputs.map(encodeInput),
-    encodeCompactSizeUint(outputs.length),
-    ...outputs.map(encodeOutput),
-    uInt32ToBytes(lockTime)
+  return encodeAny(
+    versionByte,
+    inputs.map(encodeInput),
+    outputs.map(encodeOutput),
+    lockTime
   );
 }
-const DEFAULT_SEQUENCE = 4294967295;
-function encodeInput({ hash, index, script, sequence = DEFAULT_SEQUENCE }) {
-  return concatBytes(
-    hash,
-    // hash.reverse(),
-    uInt32ToBytes(index),
-    script.length,
-    script,
-    uInt32ToBytes(sequence)
-  );
+function encodeInput(input) {
+  if (input === null) {
+    return encodeBytes(new Uint8Array([]));
+  }
+  const { hash, index, script, sequence = MAX_SEQUENCE } = input;
+  return encodeAny(hash, index, encodeBytes(script), sequence);
 }
 
 function encodeOutput({ value, script }) {
-  return concatBytes(uInt64ToBytes(value), script.length, script);
+  return encodeAny(value, encodeBytes(script));
 }

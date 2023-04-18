@@ -1,5 +1,5 @@
 export default {
-  TESTNET: 0,
-  BTC: 1,
+  TESTNET: 111,
+  BTC: 0,
   DOGE: 30,
 };

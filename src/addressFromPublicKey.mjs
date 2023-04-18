@@ -13,6 +13,10 @@ export default async function addressFromPublicKey(chainId, publicKey) {
   if (publicKey.length !== 33)
     throw new Error("publicKey must be in compressed 33 bytes format");
   return base58check(sha256).encode(
-    concatBytes(new Uint8Array([chainId]), await ripemd160(sha256(publicKey)))
+    concatBytes(new Uint8Array([chainId]), await publicKeyHash(publicKey))
   );
+}
+
+export async function publicKeyHash(publicKey) {
+  return ripemd160(sha256(publicKey));
 }

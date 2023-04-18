@@ -1,6 +1,6 @@
 import * as secp256k1 from "@noble/secp256k1";
 import { encodeTransaction, CHAIN_IDS } from "../src/index.mjs";
-import * as standardTransactionScript from "../src/scripts/standardTransaction.mjs";
+import standardTransactionScript from "../src/scripts/standardTransaction.mjs";
 import { addressFromPublicKey, numberToSatoshis } from "../src/index.mjs";
 import { oneLineTrim } from "common-tags";
 import { base58 } from "@scure/base";
@@ -38,14 +38,7 @@ describe("encodeTransaction", function () {
         ],
       }),
       hex`
-            000000000100eb1d909b9f297fa7f72dc7d7298f19d5454c1cae28d74
-            63f150a60aa2814d9010000006a47304402207413f23d980d48ba4855
-            126ab8fc896fdeeb7752cd9c76a2054a696a5a6137cc02201a674d6cf
-            d32668b9ac4c50ca853975a085f724cb92e95a189610e686e7f320401
-            2103ac81c3203de55b31478da413d9bb68b99dc8e33176f9f48e5efcc
-            0900bb41b4affffffff024e61bc00000000001976a914cdf39308e3b7
-            ad69de09e1e4d99e036905a4289688aca2583905000000001976a914a
-            2e4f051244a24e469d28f076fec1db4f79512b788ac00000000
+010000000100eb1d909b9f297fa7f72dc7d7298f19d5454c1cae28d7463f150a60aa2814d9010000006a47304402207413f23d980d48ba4855126ab8fc896fdeeb7752cd9c76a2054a696a5a6137cc02201a674d6cfd32668b9ac4c50ca853975a085f724cb92e95a189610e686e7f3204012103ac81c3203de55b31478da413d9bb68b99dc8e33176f9f48e5efcc0900bb41b4affffffff024e61bc00000000001e76a9196fcdf39308e3b7ad69de09e1e4d99e036905a428963ef39ba988aca2583905000000001e76a9196fa2e4f051244a24e469d28f076fec1db4f79512b7665a611888ac00000000
         `
     );
   });
